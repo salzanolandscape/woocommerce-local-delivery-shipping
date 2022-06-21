@@ -16,6 +16,28 @@ defined( 'ABSPATH' ) or exit;
 
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) )
 {
+	function change_string_shipping_not_available( $str )
+	{
+		//There are no shipping options available. Please ensure that your address has been entered correctly, or contact us if you need any help.
+		return __( 'You might be outside our usual delivery area. Please contact us and to find out if we can make it work.', 'woo-local-delivery-shipping' );
+	}
+	add_filter( 'woocommerce_no_shipping_available_html', 'change_string_shipping_not_available' );
+
+	/**
+	 * change_shipping_suggestions_to_included
+	 * 
+	 * Changes "Shipping costs are calculated during checkout." to "Included".
+	 *
+	 * @param  mixed $msg
+	 * @return void
+	 */
+	function change_string_shipping_suggestions( $msg )
+	{
+		//$msg = "Shipping costs are calculated during checkout."
+		return __( 'Included', 'woo-local-delivery-shipping' );
+	}
+	add_filter( 'woocommerce_shipping_not_enabled_on_cart_html', 'change_string_shipping_suggestions' );
+
 	/**
 	 * change_shipping_to_delivery
 	 * 
@@ -27,27 +49,12 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	 * @param  mixed $package
 	 * @return void
 	 */
-	function change_shipping_to_delivery( $name, $i, $package )
+	function change_string_shipping_to_delivery( $name, $i, $package )
 	{
 		//$name = "Shipping Method #"
 		return __( 'Delivery', 'woo-local-delivery-shipping' );
 	}
-	add_filter( 'woocommerce_shipping_package_name', 'change_shipping_to_delivery', 10, 3 );
-
-	/**
-	 * change_shipping_suggestions_to_included
-	 * 
-	 * Changes "Shipping costs are calculated during checkout." to "Included".
-	 *
-	 * @param  mixed $msg
-	 * @return void
-	 */
-	function change_shipping_suggestions_to_included( $msg )
-	{
-		//$msg = "Shipping costs are calculated during checkout."
-		return __( 'Included', 'woo-local-delivery-shipping' );
-	}
-	add_filter( 'woocommerce_shipping_not_enabled_on_cart_html', 'change_shipping_suggestions_to_included' );
+	add_filter( 'woocommerce_shipping_package_name', 'change_string_shipping_to_delivery', 10, 3 );
 
 	function local_delivery_init()
 	{
