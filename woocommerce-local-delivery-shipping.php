@@ -16,14 +16,35 @@ defined( 'ABSPATH' ) or exit;
 
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) )
 {
+	/**
+	 * change_shipping_to_delivery
+	 * 
+	 * Changes "Shipping Method #" to "Delivery. Remove this function and filter
+	 * if your site is using other shipping methods in addition to delivery.
+	 *
+	 * @param  mixed $name
+	 * @param  mixed $i
+	 * @param  mixed $package
+	 * @return void
+	 */
 	function change_shipping_to_delivery( $name, $i, $package )
 	{
+		//$name = "Shipping Method #"
 		return __( 'Delivery', 'woo-local-delivery-shipping' );
 	}
 	add_filter( 'woocommerce_shipping_package_name', 'change_shipping_to_delivery', 10, 3 );
 
+	/**
+	 * change_shipping_suggestions_to_included
+	 * 
+	 * Changes "Shipping costs are calculated during checkout." to "Included".
+	 *
+	 * @param  mixed $msg
+	 * @return void
+	 */
 	function change_shipping_suggestions_to_included( $msg )
 	{
+		//$msg = "Shipping costs are calculated during checkout."
 		return __( 'Included', 'woo-local-delivery-shipping' );
 	}
 	add_filter( 'woocommerce_shipping_not_enabled_on_cart_html', 'change_shipping_suggestions_to_included' );
