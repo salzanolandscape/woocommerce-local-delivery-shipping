@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) or exit;
 /**
  * Plugin Name: WooCommerce Local Delivery Shipping Method
  * Plugin URI: https://breakfastco.xyz
- * Description: Creates a local delivery shipping method that costs $0. Enables both shipping and billing addresses in checkout without enabling shipping costs.
+ * Description: Creates a local delivery shipping method. Assumes delivery costs are built into product prices. Enables both shipping and billing addresses in checkout without enabling shipping costs.
  * Version: 1.0.0
  * Author: Corey Salzano
  * Author URI: https://github.com/csalzano
@@ -45,10 +45,10 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 				{
 					$this->id                 = 'wc_shipping_method_local_delivery';
 					$this->instance_id        = absint( $instance_id );
-					$this->method_title       = __( 'Local delivery', 'woo-local-delivery-shipping' );
-					$this->method_description = __( 'Local delivery via pickup trucks with dump beds.' );
+					$this->method_title       = __( 'Local Delivery', 'woo-local-delivery-shipping' );
+					$this->method_description = __( 'Assumes delivery costs are built into product prices.', 'woo-local-delivery-shipping' );
 
-					$this->title = __( 'Local Delivery Shipping', 'woo-local-delivery-shipping' );
+					$this->title = __( 'Local Delivery', 'woo-local-delivery-shipping' );
 
 					//Default is just settings. shipping-zones gets us in the list when adding methods to zones
 					$this->supports = array( 
