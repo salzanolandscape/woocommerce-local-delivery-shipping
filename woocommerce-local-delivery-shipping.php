@@ -16,6 +16,20 @@ defined( 'ABSPATH' ) or exit;
 
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) )
 {
+	/**
+	 * change_string_shipping_may_be_available
+	 * 
+	 * Changes "Enter your address to view shipping options." to say delivery.
+	 *
+	 * @param  string $str
+	 * @return string
+	 */
+	function change_string_shipping_may_be_available( $str )
+	{
+		return __( 'Enter your address to view delivery options.', 'woo-local-delivery-shipping' );
+	}
+	add_filter( 'woocommerce_shipping_may_be_available_html', 'change_string_shipping_may_be_available' );
+
 	function change_string_shipping_not_available( $str )
 	{
 		//There are no shipping options available. Please ensure that your address has been entered correctly, or contact us if you need any help.
