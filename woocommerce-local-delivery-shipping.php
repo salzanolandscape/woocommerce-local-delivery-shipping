@@ -67,6 +67,54 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 				public function calculate_shipping( $package = array() )
 				{
 					/*
+						Example $package array
+
+						$package = array(7)
+							contents: array(1)
+								f3f27a324736617f20abbf2ffd806f6d: array(12)
+									key: "f3f27a324736617f20abbf2ffd806f6d"
+									product_id: 516
+									variation_id: 0
+									variation: array(0)
+									quantity: 4
+									data_hash: "b5c1d5ca8bae6d4896cf1807cdf763f0"
+									line_tax_data: array(2)
+										subtotal: array(0)
+										total: array(0)
+									line_subtotal: 180
+									line_subtotal_tax: 0
+									line_total: 180
+									line_tax: 0
+									data: WC_Product_Simple
+										object_type: "product"
+										post_type: "product"
+										cache_group: "products"
+										data: array(50)
+										supports: array(1)
+										id: 516
+										changes: array(0)
+										object_read: true
+										extra_data: array(0)
+										default_data: array(50)
+										data_store: WC_Data_Store
+										meta_data: null
+							contents_cost: 180
+							applied_coupons: array(0)
+							user: array(1)
+								ID: 0
+							destination: array(7)
+								country: "US"
+								state: "PA"
+								postcode: "16101"
+								city: "New Castle"
+								address: "1020 N Croton Ave"
+								address_1: "1020 N Croton Ave"
+								address_2: ""
+							cart_subtotal: "180"
+							rates: array(0)
+					*/
+
+					/*
 						WC_Shipping_Method::add_rate() accepts an array like...
 
 						$rate = array(
